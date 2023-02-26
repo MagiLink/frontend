@@ -6,7 +6,6 @@ import js_beautify from 'js-beautify';
 import { useStateContext } from '../context/ContextProvider';
 
 const TestComponent = ({ loading }) => {
-	console.log('loading: ', loading);
 	const { code, setCode } = useStateContext();
 
 	const prompt = prompts[0].prompt;

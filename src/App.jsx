@@ -10,11 +10,9 @@ function App() {
 
 	const placeholderText = `DUMMY PLACEHOLDER`;
 
-	//TODO: set this up as an env variable
 	const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 	const handleGenerateComponent = () => {
-		// make axios call to backend
 		setLoading(true);
 		axios({
 			method: `POST`,
