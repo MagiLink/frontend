@@ -1,7 +1,6 @@
-module.exports = [
+export default [
 	{
-		prompt:
-			'Create a react component called SendButton that has a button with onclick functionality',
+		prompt: 'Create a react component called SendButton that has a button with onclick functionality',
 		generated_code: `import React from 'react';
 
                         const SendButton = () => {
