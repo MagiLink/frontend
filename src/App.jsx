@@ -6,15 +6,16 @@ import axios from 'axios';
 function App() {
 	const [userPrompt, setUserPrompt] = useState('');
 	const { code, setCode } = useStateContext();
+	const [loading, setLoading] = useState(false);
 
 	const placeholderText = `DUMMY PLACEHOLDER`;
 
 	//TODO: set this up as an env variable
-	const SERVER_URL = `http://localhost:3333/generate`;
+	const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 	const handleGenerateComponent = () => {
 		// make axios call to backend
-
+		setLoading(true);
 		axios({
 			method: `POST`,
 			url: SERVER_URL,
@@ -24,11 +25,11 @@ function App() {
 			},
 		})
 			.then(function (response) {
-				// store result to context
-				console.log(`response:`, response.data);
 				setCode(response.data.generated_code);
+				setLoading(false);
 			})
 			.catch(function (error) {
+				setLoading(false);
 				console.log(`error:`, error);
 			});
 	};
@@ -53,13 +54,14 @@ function App() {
 					<button
 						className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
 						onClick={handleGenerateComponent}
+						disabled={loading}
 					>
-						Generate your component
+						{loading ? `Generating...` : `Generate your component`}
 					</button>
 				</div>
 			</main>
 
-			<TestComponent />
+			<TestComponent loading={loading} />
 		</div>
 	);
 }
