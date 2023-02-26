@@ -5,17 +5,13 @@ import CodePreview from './CodePreview';
 import js_beautify from 'js-beautify';
 import { useStateContext } from '../context/ContextProvider';
 
-const TestComponent = () => {
+const TestComponent = ({ loading }) => {
 	const { code, setCode } = useStateContext();
 
 	const prompt = prompts[0].prompt;
 	const generatedCode = js_beautify(prompts[0].generated_code);
 
-	useEffect(() => {
-		setCode(generatedCode);
-	}, []);
-
-	console.log(code, '<<< STORED CODE');
+	if (loading) return <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-black"></div>;
 
 	return (
 		<div>
