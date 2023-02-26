@@ -4,6 +4,7 @@
 		"browser": true,
 		"es2021": true
 	},
+	"loader": { ".js": "jsx" },
 	"extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
 	"overrides": [],
 	"parserOptions": {
@@ -11,5 +12,14 @@
 		"sourceType": "module"
 	},
 	"plugins": ["react"],
-	"rules": {}
+	"rules": {
+		"react/react-in-jsx-scope": "off",
+		"react/prop-types": "off",
+		"react/jsx-uses-react": "off"
+	},
+	"settings": {
+		"react": {
+			"version": "18.2.0"
+		}
+	}
 }

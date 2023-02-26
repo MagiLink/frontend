@@ -15,7 +15,11 @@
 	},
 	"dependencies": {
 		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
+		"react-dom": "^18.2.0",
+		"@codemirror/lang-javascript": "^6.1.4",
+		"@uiw/react-codemirror": "^4.19.9",
+		"js-beautify": "^1.14.7",
+		"react-live": "^3.1.2"
 	},
 	"devDependencies": {
 		"@types/react": "^18.0.27",

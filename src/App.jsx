@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import TestComponent from './components/TestComponent';
 
 function App() {
 	const [userPrompt, setUserPrompt] = useState('');
 	const placeholderText = `DUMMY PLACEHOLDER`;
 	return (
-		<div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
-			<main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-12 sm:mt-20">
+		<div className="flex max-w-5xl mx-auto flex-col items-center justify-center p-10 min-h-screen">
+			<main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-10 sm:mt-16">
 				<h1 className="sm:text-6xl text-4xl max-w-2xl font-bold text-slate-900">
 					Generate React components from a prompt
 				</h1>
@@ -29,6 +30,8 @@ function App() {
 					</button>
 				</div>
 			</main>
+
+			<TestComponent />
 		</div>
 	);
 }
