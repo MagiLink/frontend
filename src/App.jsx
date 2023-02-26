@@ -1,9 +1,37 @@
 import { useState } from 'react';
 import TestComponent from './components/TestComponent';
+import { useStateContext } from './context/ContextProvider';
+import axios from 'axios';
 
 function App() {
 	const [userPrompt, setUserPrompt] = useState('');
+	const { code, setCode } = useStateContext();
+
 	const placeholderText = `DUMMY PLACEHOLDER`;
+
+	//TODO: set this up as an env variable
+	const SERVER_URL = `http://localhost:3333/generate`;
+
+	const handleGenerateComponent = () => {
+		// make axios call to backend
+
+		axios({
+			method: `POST`,
+			url: SERVER_URL,
+			headers: { Authorization: `` },
+			data: {
+				prompt: userPrompt,
+			},
+		})
+			.then(function (response) {
+				// store result to context
+				console.log(`response:`, response.data);
+				setCode(response.data.generated_code);
+			})
+			.catch(function (error) {
+				console.log(`error:`, error);
+			});
+	};
 	return (
 		<div className="flex max-w-5xl mx-auto flex-col items-center justify-center p-10 min-h-screen">
 			<main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-10 sm:mt-16">
@@ -24,7 +52,7 @@ function App() {
 					/>
 					<button
 						className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
-						onClick={(e) => console.log(e)}
+						onClick={handleGenerateComponent}
 					>
 						Generate your component
 					</button>
