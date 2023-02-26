@@ -3,7 +3,13 @@ import { createContext, useContext, useState } from 'react';
 const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
-	const [code, setCode] = useState();
+	const [code, setCode] = useState(`() => {
+	const handleClick = () => {
+		alert('Button clicked!');
+	};
+
+	return <button onClick={handleClick}>Send</button>;
+}`);
 
 	return (
 		<StateContext.Provider
