@@ -1,7 +1,6 @@
 import CodeEditor from './CodeEditor';
 import CodePreview from './CodePreview';
 import { useStateContext } from '../context/ContextProvider';
-import Button from './Button';
 
 const TestComponent = ({ loading }) => {
 	const { code, setCode } = useStateContext();
