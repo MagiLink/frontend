@@ -10,12 +10,15 @@ export const ContextProvider = ({ children }) => {
 
 	return <button onClick={handleClick}>Send</button>;
 }`);
+	const [currentLink, setCurrentLink] = useState('');
 
 	return (
 		<StateContext.Provider
 			value={{
 				code,
 				setCode,
+				currentLink,
+				setCurrentLink,
 			}}
 		>
 			{children}

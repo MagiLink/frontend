@@ -8,9 +8,11 @@ function Generate() {
 	const { code, setCode } = useStateContext();
 	const [loading, setLoading] = useState(false);
 
-	const placeholderText = `DUMMY PLACEHOLDER`;
+	const placeholderText = `Enter your prompt here...`;
 
 	const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+	
+	console.log(SERVER_URL);
 
 	const handleGenerateComponent = () => {
 		setLoading(true);
@@ -33,25 +35,25 @@ function Generate() {
 	};
 
 	return (
-		<div className="flex max-w-5xl mx-auto flex-col items-center justify-center p-10 min-h-screen">
-			<main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-10 sm:mt-16">
-				<h1 className="sm:text-6xl text-4xl max-w-2xl font-bold text-slate-900">
-					Generate React components from a prompt
-				</h1>
-
-				<div className="max-w-xl w-full">
-					<div className="flex mt-10 items-center space-x-3">
-						<p className="text-left font-medium">Describe the component you want to generate</p>
-					</div>
+		<div>
+			<main className='flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-10 sm:mt-16'>
+				<div className='max-w-xl w-full'>
+					<label
+						for='message'
+						class='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+					>
+						Describe the component you want to generate
+					</label>
 					<textarea
-						value={userPrompt}
+						id='message'
+						rows='4'
+						className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-black focus:border-black'
 						onChange={(e) => setUserPrompt(e.target.value)}
-						rows={4}
-						className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
 						placeholder={placeholderText}
+						value={userPrompt}
 					/>
 					<button
-						className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
+						className='bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full'
 						onClick={handleGenerateComponent}
 						disabled={loading}
 					>

@@ -1,4 +1,4 @@
-import { LiveProvider, LiveError, LivePreview } from 'react-live';
+import { LiveProvider, LiveError, LivePreview, LiveEditor } from 'react-live';
 
 const CodePreview = ({ generatedCode }) => {
 	return (

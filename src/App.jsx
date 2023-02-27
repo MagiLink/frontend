@@ -4,6 +4,7 @@ import { useStateContext } from './context/ContextProvider';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Generate from './pages/Generate';
+import Home from './pages/Home';
 
 function App() {
 	const [userPrompt, setUserPrompt] = useState('');
@@ -15,10 +16,10 @@ function App() {
 	const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 	return (
-		<div className="flex max-w-5xl mx-auto flex-col items-center justify-center p-10 min-h-screen">
-			<Navbar />
+		<div className='flex max-w-5xl mx-auto flex-col items-center justify-center p-10 min-h-screen'>
+			{/* <Navbar /> */}
 			<Routes>
-				<Route path="/generate" element={<Generate />} />
+				<Route path='/' element={<Home />} />
 			</Routes>
 		</div>
 	);
