@@ -1,9 +1,10 @@
 import SearchBar from '../components/SearchBar';
 import React, { useState } from 'react';
 import axios from 'axios';
+import CardComponent from '../components/CardComponent';
 
 function Library() {
-	const [searchResults, setSearchResults] = useState([]);
+	const [searchResults, setSearchResults] = useState(['a', 'b', 'c']);
 	const [loading, setLoading] = useState(false);
 	const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -22,20 +23,18 @@ function Library() {
 	return (
 		<div className="w-full">
 			<SearchBar handleSearch={searchComponentLibrary} />
-			{loading ? (
-				<p>loading...</p>
-			) : (
-				<div>
-					{searchResults.map((result) => {
-						return (
-							<div>
-								<h1>{result.title}</h1>
-								<p>{result.description}</p>
-							</div>
-						);
-					})}
-				</div>
-			)}
+
+			<div className="flex flex-col items-center">
+				{loading ? (
+					<div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-black"></div>
+				) : (
+					<div>
+						{searchResults.map((result) => {
+							return <CardComponent />;
+						})}
+					</div>
+				)}
+			</div>
 		</div>
 	);
 }
