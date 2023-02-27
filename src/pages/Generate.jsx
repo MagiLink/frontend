@@ -12,13 +12,11 @@ function Generate() {
 
 	const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
-	console.log(SERVER_URL);
-
 	const handleGenerateComponent = () => {
 		setLoading(true);
 		axios({
 			method: `POST`,
-			url: SERVER_URL,
+			url: `${SERVER_URL}/generate`,
 			headers: { Authorization: `` },
 			data: {
 				prompt: userPrompt,

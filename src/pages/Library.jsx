@@ -11,8 +11,11 @@ function Library() {
 	const searchComponentLibrary = async (prompt) => {
 		try {
 			setLoading(true);
-			const result = await axios.get('/', {});
-			setSearchResults(result.data);
+			const result = await axios.post(`${SERVER_URL}/search`, {
+				prompt,
+				top_k: 3,
+			});
+			setSearchResults(result.data.matches);
 			setLoading(false);
 		} catch (error) {
 			setLoading(false);
@@ -29,8 +32,8 @@ function Library() {
 					<div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-black"></div>
 				) : (
 					<div>
-						{searchResults.map((result) => {
-							return <CardComponent />;
+						{searchResults.map((data, index) => {
+							return <CardComponent key={index} data={data} />;
 						})}
 					</div>
 				)}
