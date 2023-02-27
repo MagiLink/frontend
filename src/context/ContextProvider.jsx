@@ -10,7 +10,7 @@ export const ContextProvider = ({ children }) => {
 
 	return <button onClick={handleClick}>Send</button>;
 }`);
-	const [currentLink, setCurrentLink] = useState('');
+	const [currentLink, setCurrentLink] = useState('generate');
 
 	return (
 		<StateContext.Provider
