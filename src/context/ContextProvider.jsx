@@ -3,6 +3,9 @@ import { createContext, useContext, useState } from 'react';
 const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
+	const [prompt, setPrompt] = useState(
+		'Create a react component called SendButton that has a button with onclick functionality',
+	);
 	const [code, setCode] = useState(`() => {
 	const handleClick = () => {
 		alert('Button clicked!');
@@ -19,6 +22,8 @@ export const ContextProvider = ({ children }) => {
 				setCode,
 				currentLink,
 				setCurrentLink,
+				prompt,
+				setPrompt,
 			}}
 		>
 			{children}
