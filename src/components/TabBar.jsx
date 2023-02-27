@@ -5,30 +5,26 @@ const TabBar = () => {
 	const { currentLink, setCurrentLink } = useStateContext();
 
 	console.log(currentLink);
-
-	const activeLink = 'inline-block px-4 py-3 text-white bg-black rounded-lg';
-	const inactiveLink =
-		'inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-black dark:hover:text-white';
+	const commonStyles = 'w-48 my-2 mx-2 rounded-xl font-medium px-4 py-2 w-full';
+	const activeLink = `${commonStyles} bg-black text-white hover:bg-black/80`;
+	const inactiveLink = `${commonStyles} bg-white text-black border border-black hover:bg-black/20 hover:border-white`;
 
 	return (
-		<ul class='flex flex-wrap gap-6 text-sm font-medium text-center text-gray-600 dark:text-gray-600'>
-			<li>
-				<button
-					className={currentLink === '/generate' ? activeLink : inactiveLink}
-					onClick={() => setCurrentLink('generate')}
-				>
-					Generate
-				</button>
-			</li>
-			<li>
-				<button
-					className={currentLink === '/library' ? activeLink : inactiveLink}
-					onClick={() => setCurrentLink('library')}
-				>
-					Library
-				</button>
-			</li>
-		</ul>
+		<div className="flex my-5 w-full  justify-center">
+			<button
+				className={currentLink === 'generate' ? activeLink : inactiveLink}
+				onClick={() => setCurrentLink('generate')}
+			>
+				Generate
+			</button>
+
+			<button
+				className={currentLink === 'library' ? activeLink : inactiveLink}
+				onClick={() => setCurrentLink('library')}
+			>
+				Library
+			</button>
+		</div>
 	);
 };
 
