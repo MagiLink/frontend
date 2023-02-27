@@ -55,8 +55,6 @@ function Generate() {
 				</div>
 			</main>
 			<TestComponent loading={loading} />
-			<Button text={'Copy code to clipboard'} onClick={() => navigator.clipboard.writeText(code)} />
-			<Button text={'Share your creation'} />
 		</div>
 	);
 }

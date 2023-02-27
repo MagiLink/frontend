@@ -5,7 +5,7 @@ const TabBar = () => {
 	const { currentLink, setCurrentLink } = useStateContext();
 
 	console.log(currentLink);
-	const commonStyles = 'w-48 my-2 mx-2 rounded-xl font-medium px-4 py-2 w-full';
+	const commonStyles = 'w-52 my-2 mx-2 rounded-xl font-medium px-4 py-6';
 	const activeLink = `${commonStyles} bg-black text-white hover:bg-black/80`;
 	const inactiveLink = `${commonStyles} bg-white text-black border border-black hover:bg-black/20 hover:border-white`;
 
