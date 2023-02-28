@@ -16,6 +16,28 @@ const DUMMY_SEARCH_RESULTS = [
 		category: 'text',
 	},
 	{
+		prompt: 'blue button that says hello world',
+		component: `() => {
+		return <h1>Hello, world!</h1>;
+	}`,
+		score: 0.5,
+		component_name: 'HelloWorld',
+		upvotes: 20,
+		username: 'janedoe',
+		category: 'text',
+	},
+	{
+		prompt: 'blue button that says hello world',
+		component: `() => {
+		return <h1>Hello, world!</h1>;
+	}`,
+		score: 0.5,
+		component_name: 'HelloWorld',
+		upvotes: 20,
+		username: 'janedoe',
+		category: 'text',
+	},
+	{
 		prompt: 'purple button that says hello world',
 		component: `() => {
 		return (
@@ -110,7 +132,7 @@ function Library() {
 										<h1>#{category}</h1>
 									</div>
 
-									<div>
+									<div className="max-w-3xl bg-red-300 grid grid-cols-2">
 										{components.map((data, index) => {
 											return <CardComponent key={index} data={data} />;
 										})}
