@@ -20,7 +20,7 @@ const DUMMY_SEARCH_RESULTS = [
 		component: `() => {
 		return <h1>Hello, world!</h1>;
 	}`,
-		score: 0.5,
+		score: 0.83,
 		component_name: 'HelloWorld',
 		upvotes: 20,
 		username: 'janedoe',
@@ -31,7 +31,7 @@ const DUMMY_SEARCH_RESULTS = [
 		component: `() => {
 		return <h1>Hello, world!</h1>;
 	}`,
-		score: 0.5,
+		score: 0.22,
 		component_name: 'HelloWorld',
 		upvotes: 20,
 		username: 'janedoe',
@@ -132,7 +132,7 @@ function Library() {
 										<h1>#{category}</h1>
 									</div>
 
-									<div className="max-w-3xl bg-red-300 grid grid-cols-2">
+									<div className="max-w-3xl gap-10 grid grid-cols-3 sm:grid-cols-2 ">
 										{components.map((data, index) => {
 											return <CardComponent key={index} data={data} />;
 										})}
