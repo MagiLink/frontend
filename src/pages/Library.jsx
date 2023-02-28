@@ -90,6 +90,8 @@ function Library() {
 		}, {});
 	}
 	const groupedComponents = groupBy(DUMMY_SEARCH_RESULTS, 'category');
+	const categories = Object.entries(groupedComponents);
+	console.log('categories: ', categories);
 
 	return (
 		<div className="w-full">
@@ -100,10 +102,21 @@ function Library() {
 					<div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-black"></div>
 				) : (
 					<div>
-						{groupedComponents.map((group, index) => {
-							group.map((data, index) => {
-								return <CardComponent key={index} data={data} />;
-							});
+						{categories.map((group, index) => {
+							const [category, components] = group;
+							return (
+								<div key={index}>
+									<div>
+										<h1>#{category}</h1>
+									</div>
+
+									<div>
+										{components.map((data, index) => {
+											return <CardComponent key={index} data={data} />;
+										})}
+									</div>
+								</div>
+							);
 						})}
 					</div>
 				)}
