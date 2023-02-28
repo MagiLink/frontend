@@ -5,7 +5,7 @@ import CardComponent from '../components/CardComponent';
 
 const DUMMY_SEARCH_RESULTS = [
 	{
-		prompt: 'DUMMY PROMPT 1',
+		prompt: 'blue button that says hello world',
 		component: `() => {
 		return <h1>Hello, world!</h1>;
 	}`,
@@ -16,7 +16,7 @@ const DUMMY_SEARCH_RESULTS = [
 		category: 'text',
 	},
 	{
-		prompt: 'DUMMY PROMPT 2',
+		prompt: 'purple button that says hello world',
 		component: `() => {
 		return (
 			<ul>
@@ -27,14 +27,14 @@ const DUMMY_SEARCH_RESULTS = [
 		);
 	}`,
 		score: 0.75,
-		component_name: 'List',
+		component_name: 'List items',
 		upvotes: 15,
 		username: 'johndoe',
 		category: 'list',
 	},
 
 	{
-		prompt: 'DUMMY PROMPT 3',
+		prompt: 'blue button that says hello world',
 		component: `() => {
 		return (
 			<form>
