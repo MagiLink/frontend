@@ -1,18 +1,23 @@
 import React from 'react';
+import CodePreview from './CodePreview';
 
 function CardComponent({ data }) {
-	const { prompt, component, score } = data;
+	const { prompt, component, score, component_name, upvotes, username, category } = data;
 	return (
-		<div className="max-w-sm bg-black rounded-lg shadow my-5">
-			<a href="#">
-				<img className="rounded-t-lg" src="https://source.unsplash.com/random" alt="" />
-			</a>
+		<div className="max-w-sm bg-gray-500 rounded-lg shadow my-5">
+			{/* <a href="#">
+				<img className="rounded-t-lg" src={`https://source.unsplash.com/random/${category}`} alt="" />
+			</a> */}
+			<CodePreview generatedCode={component} />
 			<div className="p-5">
 				<a href="#">
-					<h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">DUMMY COMPONENT NAME</h5>
+					<h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{component_name}</h5>
 				</a>
-				<p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{prompt}</p>
-				<p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{score}</p>
+				<p className="mb-3 font-normal text-white">{prompt}</p>
+				<p className="mb-3 font-normal text-white">{upvotes}</p>
+				<p className="mb-3 font-normal text-white">{score}</p>
+				<p className="mb-3 font-normal text-white">{username}</p>
+				<p className="mb-3 font-normal text-white">{category}</p>
 			</div>
 		</div>
 	);
