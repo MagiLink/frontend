@@ -74,7 +74,7 @@ const DUMMY_SEARCH_RESULTS = [
 			</form>
 		);
 	}`,
-		score: 0.9,
+		score: 0.1,
 		component_name: 'Form',
 		upvotes: 25,
 		username: 'janedoe',

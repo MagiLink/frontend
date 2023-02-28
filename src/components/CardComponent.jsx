@@ -4,7 +4,8 @@ import axios from 'axios';
 
 function CardComponent({ data }) {
 	const { prompt, component, score, component_name, upvotes, username, category } = data;
-
+	const similarityScore = Math.round(score * 100);
+	console.log('similarityScore: ', similarityScore);
 	const [localUpvotes, setLocalUpvotes] = useState(upvotes);
 	const [liked, setLiked] = useState(false);
 	const handleLikePress = async () => {
@@ -40,7 +41,17 @@ function CardComponent({ data }) {
 							{liked ? `♥️` : `♡`}
 						</button>
 					</div>
-					<div className="text-white">{score * 100}% similarity</div>
+
+					<div className="relative w-full bg-gray-200 rounded-full dark:bg-gray-700 mx-3 h-4 ">
+						<div
+							style={{ width: `${similarityScore}%`, backgroundColor: '#3B82F6', height: '100%' }}
+							className="text-xs absolute  font-medium left-0 top-0 text-blue-100 text-center p-0.5 leading-none rounded-full  z-0"
+						></div>
+						<p className="justify-center items-center flex absolute w-full top-0 text-white text-center">
+							{similarityScore}% similarity
+						</p>
+					</div>
+
 					<div className="text-white">{username || 'anon'}</div>
 				</div>
 			</div>
