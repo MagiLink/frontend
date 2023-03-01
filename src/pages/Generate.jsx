@@ -4,6 +4,7 @@ import { useStateContext } from '../context/ContextProvider';
 import axios from 'axios';
 import Button from '../components/Button';
 import FormModal from '../components/FormModal';
+import { autoCloseTags } from '@codemirror/lang-javascript';
 
 function Generate() {
 	const [userPrompt, setUserPrompt] = useState('');
@@ -15,24 +16,20 @@ function Generate() {
 
 	const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
-	const handleGenerateComponent = () => {
+	const handleGenerateComponent = async () => {
 		setLoading(true);
-		axios({
-			method: `POST`,
-			url: `${SERVER_URL}/generate`,
-			headers: { Authorization: `` },
-			data: {
+		try {
+			const result = await axios.post(`${SERVER_URL}/generate`, {
 				prompt: userPrompt,
-			},
-		})
-			.then(function (response) {
-				setCode(response.data.generated_code);
-				setLoading(false);
-			})
-			.catch(function (error) {
-				setLoading(false);
-				console.log(`error:`, error);
 			});
+
+			setCode(result.data.component);
+			setLoading(false);
+
+			return result.data.component;
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
