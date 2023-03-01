@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CardComponent from '../components/CardComponent';
 import { useStateContext } from '../context/ContextProvider';
+
 const DUMMY_SEARCH_RESULTS = [
 	{
 		prompt: 'blue button that says hello world',
@@ -90,15 +91,14 @@ function Library() {
 	const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 	const searchComponentLibrary = async (prompt) => {
-		console.log('prompt: ', prompt);
 		try {
 			setLoading(true);
 			const result = await axios.post(`${SERVER_URL}/search`, {
 				prompt,
 				top_k: 3,
 			});
-			console.log('result.data.matches: ', result.data.matches);
-			setSearchResults(result.data.matches);
+			console.log('result.data: ', result.data);
+			setSearchResults(result.data);
 			// setSearchResults(DUMMY_SEARCH_RESULTS);
 			setLoading(false);
 		} catch (error) {
@@ -122,15 +122,17 @@ function Library() {
 	const getAllComponents = async () => {
 		try {
 			const results = await axios.get(`${SERVER_URL}/library`);
-			setAllComponents(results);
+			console.log('get all results: ', results);
+			setAllComponents(results.data);
 		} catch (error) {
 			console.log('error getting all components from library: ', error);
 		}
 	};
 
 	useEffect(() => {
-		if (!prompt) getAllComponents();
-	});
+		// if (!prompt) getAllComponents();
+		getAllComponents();
+	}, [prompt]);
 
 	return (
 		<div className="w-full">

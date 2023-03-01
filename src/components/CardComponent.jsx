@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import CodePreview from './CodePreview';
 import axios from 'axios';
+import ComponentPreviewModal from './ComponentPreviewModal';
 
 function CardComponent({ data }) {
+	const [isModalActive, setIsModalActive] = useState(false);
 	const { prompt, component, score, component_name, upvotes, username, category } = data;
 	const similarityScore = Math.round(score * 100);
 	console.log('similarityScore: ', similarityScore);
@@ -15,6 +17,13 @@ function CardComponent({ data }) {
 		} catch (error) {
 			console.log('error liking component ', error);
 		}
+	};
+
+	const handleMouseEnter = () => {
+		setIsModalActive(true);
+	};
+	const handleMouseExit = () => {
+		setIsModalActive(false);
 	};
 
 	const progressBarColor = (score) => {
@@ -41,7 +50,6 @@ function CardComponent({ data }) {
 
 	return (
 		<div className="w-80  border border-black rounded-lg shadow">
-			{/* <CodePreview generatedCode={component} /> */}
 			<div className="p-5 pb-2 flex flex-col items-center">
 				<h1 className="mb-2 text-xl font-bold text-gray-900">{component_name}</h1>
 
@@ -75,6 +83,8 @@ function CardComponent({ data }) {
 					<div className="text-black">{username || 'anon'}</div>
 				</div>
 			</div>
+
+			<ComponentPreviewModal code={component} isModalActive={isModalActive} setIsModalActive={setIsModalActive} />
 		</div>
 	);
 }
