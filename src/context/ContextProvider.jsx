@@ -24,6 +24,8 @@ export const ContextProvider = ({ children }) => {
 	// }`);
 	const [currentLink, setCurrentLink] = useState('generate');
 
+	const [isFormModalActive, setIsFormModalActive] = useState(false);
+
 	return (
 		<StateContext.Provider
 			value={{
@@ -31,6 +33,8 @@ export const ContextProvider = ({ children }) => {
 				setCode,
 				currentLink,
 				setCurrentLink,
+				isFormModalActive,
+				setIsFormModalActive,
 				prompt,
 				setPrompt,
 			}}

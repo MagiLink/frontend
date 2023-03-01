@@ -32,7 +32,6 @@ const CodeEditor = () => {
 				{pressed ? 'Copied' : <CopySVG />}
 			</Button>
 
-			<Button text={'Share your creation'} />
 		</div>
 	);
 };
