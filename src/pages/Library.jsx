@@ -96,13 +96,13 @@ function Library() {
 		console.log('searching component library');
 		try {
 			setLoading(true);
-			// const result = await axios.post(`${SERVER_URL}/library/search`, {
-			// 	prompt,
-			// 	top_k: 3,
-			// });
-			// console.log('result.data: ', result.data);
-			// setSearchResults(result.data);
-			setSearchResults(DUMMY_SEARCH_RESULTS);
+			const result = await axios.post(`${SERVER_URL}/library/search`, {
+				prompt,
+				top_k: 3,
+			});
+			console.log('result.data: ', result.data);
+			setSearchResults(result.data.matches);
+			// setSearchResults(DUMMY_SEARCH_RESULTS);
 			setLoading(false);
 		} catch (error) {
 			setLoading(false);

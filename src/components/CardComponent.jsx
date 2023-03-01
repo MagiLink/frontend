@@ -9,6 +9,7 @@ function CardComponent({ data }) {
 	const similarityScore = Math.round(score * 100);
 
 	const [localUpvotes, setLocalUpvotes] = useState(upvotes);
+	console.log('localUpvotes: ', localUpvotes);
 	const [liked, setLiked] = useState(false);
 	const handleLikePress = async () => {
 		try {
