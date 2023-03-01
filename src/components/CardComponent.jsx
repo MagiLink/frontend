@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import CodePreview from './CodePreview';
 import axios from 'axios';
 import ComponentPreviewModal from './ComponentPreviewModal';
@@ -9,11 +9,14 @@ function CardComponent({ data }) {
 	const similarityScore = Math.round(score * 100);
 
 	const [localUpvotes, setLocalUpvotes] = useState(upvotes);
-	console.log('localUpvotes: ', localUpvotes);
+
 	const [liked, setLiked] = useState(false);
 	const handleLikePress = async () => {
 		try {
 			setLiked(!liked);
+			if (liked) setLocalUpvotes(Number(localUpvotes - 1));
+			if (!liked) setLocalUpvotes(Number(localUpvotes + 1));
+
 			//TODO make api call for upvoting or downvoting
 		} catch (error) {
 			console.log('error liking component ', error);
@@ -41,13 +44,20 @@ function CardComponent({ data }) {
 		}
 	};
 
-	useEffect(() => {
-		if (liked) {
-			setLocalUpvotes(localUpvotes + 1);
-		} else {
-			setLocalUpvotes(localUpvotes - 1);
-		}
-	}, [liked]);
+	// useMemo(() => {
+	// 	if (!liked) {
+	// 		setLocalUpvotes(localUpvotes - 1);
+	// 	} else {
+	// 		setLocalUpvotes(localUpvotes + 1);
+	// 	}
+	// }, [liked]);
+	// useEffect(() => {
+	// 	if (!liked) {
+	// 		setLocalUpvotes(localUpvotes - 1);
+	// 	} else {
+	// 		setLocalUpvotes(localUpvotes + 1);
+	// 	}
+	// }, [liked]);
 
 	return (
 		<div
