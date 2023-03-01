@@ -152,7 +152,7 @@ function Library() {
 							return (
 								<div key={index}>
 									<div>
-										<h1>#{category}</h1>
+										<h1>#{category || 'misc'}</h1>
 									</div>
 
 									<div className="max-w-3xl  grid items-center grid-cols-2 gap-10">
