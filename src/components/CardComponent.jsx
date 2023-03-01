@@ -52,10 +52,10 @@ function CardComponent({ data }) {
 		<div
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
-			className="w-80 border border-black rounded-lg shadow h-fit "
+			className="w-80 border border-black rounded-lg shadow h-fit transition-all ease-in-out duration-300"
 		>
 			{isPreviewActive && (
-				<div className="py-4 justify-center flex bg-gray-50 ">
+				<div className="py-4 justify-center flex bg-gray-50 rounded-lg">
 					<CodePreview generatedCode={component} />
 				</div>
 			)}

@@ -10,7 +10,6 @@ function SearchBar({ handleSearch, setValidSearch }) {
 				handleSearch(prompt);
 				setValidSearch(true);
 			}
-			setValidSearch(false);
 		}
 	};
 
