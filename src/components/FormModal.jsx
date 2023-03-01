@@ -1,30 +1,31 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { componentCategories } from '../constants/categories';
 import { useStateContext } from '../context/ContextProvider';
 import Button from './Button';
 
 const FormModal = () => {
-	const { isFormModalActive, setIsFormModalActive, code } = useStateContext();
+	const { isFormModalActive, setIsFormModalActive, code, prompt } =
+		useStateContext();
 	const [componentName, setComponentName] = useState('');
 	const [componentCategory, setComponentCategory] = useState('');
 
 	const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 	const compObj = {
-		component_name: componentName,
-		component_category: componentCategory,
+		name: componentName,
+		category: componentCategory,
 		component: code,
+		prompt,
 	};
-
-	console.log(compObj, '<<< compObj');
 
 	const handleShare = async () => {
 		try {
-			const result = await axios.post(
-				`${SERVER_URL}/components/library`,
-				compObj
-			);
-			console.log(result);
+			const result = await axios.post(`${SERVER_URL}/components`, compObj);
+
+			console.log(result, '<<< result');
+
+			return result;
 		} catch (error) {
 			console.log(error);
 		}
