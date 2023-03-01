@@ -11,7 +11,7 @@ function CardComponent({ data }) {
 	const handleLikePress = async () => {
 		try {
 			setLiked(!liked);
-			// await axios.post(`/api/like/${data.id}`);
+			//TODO make api call for upvoting or downvoting
 		} catch (error) {
 			console.log('error liking component ', error);
 		}
@@ -56,19 +56,21 @@ function CardComponent({ data }) {
 						</button>
 					</div>
 
-					<div className="relative w-full bg-gray-200 rounded-full dark:bg-gray-700 mx-3 h-4 ">
-						<div
-							style={{
-								width: `${similarityScore}%`,
-								backgroundColor: progressBarColor(similarityScore),
-								height: '100%',
-							}}
-							className="text-xs absolute  font-medium left-0 top-0 text-blue-100 text-center p-0.5 leading-none rounded-full  z-0"
-						></div>
-						<p className="justify-center items-center flex absolute w-full top-0 text-white text-center">
-							{similarityScore}% similarity
-						</p>
-					</div>
+					{score && (
+						<div className="relative w-full bg-gray-200 rounded-full dark:bg-gray-700 mx-3 h-4 ">
+							<div
+								style={{
+									width: `${similarityScore}%`,
+									backgroundColor: progressBarColor(similarityScore),
+									height: '100%',
+								}}
+								className="text-xs absolute  font-medium left-0 top-0 text-blue-100 text-center p-0.5 leading-none rounded-full  z-0"
+							></div>
+							<p className="justify-center items-center flex absolute w-full top-0 text-white text-center">
+								{similarityScore}% similarity
+							</p>
+						</div>
+					)}
 
 					<div className="text-black">{username || 'anon'}</div>
 				</div>
