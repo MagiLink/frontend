@@ -21,7 +21,7 @@ const FormModal = () => {
 
 	const handleShare = async () => {
 		try {
-			const result = await axios.post(`${SERVER_URL}/components`, compObj);
+			const result = await axios.post(`${SERVER_URL}/library`, compObj);
 
 			console.log(result, '<<< result');
 

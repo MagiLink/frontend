@@ -93,7 +93,7 @@ function Library() {
 		console.log('prompt: ', prompt);
 		try {
 			setLoading(true);
-			const result = await axios.post(`${SERVER_URL}/search`, {
+			const result = await axios.post(`${SERVER_URL}/library/search`, {
 				prompt,
 				top_k: 3,
 			});
