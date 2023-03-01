@@ -1,11 +1,11 @@
 import SearchBar from '../components/SearchBar';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CardComponent from '../components/CardComponent';
-
+import { useStateContext } from '../context/ContextProvider';
 const DUMMY_SEARCH_RESULTS = [
 	{
-		prompt: 'DUMMY PROMPT 1',
+		prompt: 'blue button that says hello world',
 		component: `() => {
 		return <h1>Hello, world!</h1>;
 	}`,
@@ -16,7 +16,29 @@ const DUMMY_SEARCH_RESULTS = [
 		category: 'text',
 	},
 	{
-		prompt: 'DUMMY PROMPT 2',
+		prompt: 'blue button that says hello world',
+		component: `() => {
+		return <h1>Hello, world!</h1>;
+	}`,
+		score: 0.83,
+		component_name: 'HelloWorld',
+		upvotes: 20,
+		username: 'janedoe',
+		category: 'text',
+	},
+	{
+		prompt: 'blue button that says hello world',
+		component: `() => {
+		return <h1>Hello, world!</h1>;
+	}`,
+		score: 0.22,
+		component_name: 'HelloWorld',
+		upvotes: 20,
+		username: 'janedoe',
+		category: 'text',
+	},
+	{
+		prompt: 'purple button that says hello world',
 		component: `() => {
 		return (
 			<ul>
@@ -27,14 +49,14 @@ const DUMMY_SEARCH_RESULTS = [
 		);
 	}`,
 		score: 0.75,
-		component_name: 'List',
+		component_name: 'List items',
 		upvotes: 15,
 		username: 'johndoe',
 		category: 'list',
 	},
 
 	{
-		prompt: 'DUMMY PROMPT 3',
+		prompt: 'blue button that says hello world',
 		component: `() => {
 		return (
 			<form>
@@ -52,7 +74,7 @@ const DUMMY_SEARCH_RESULTS = [
 			</form>
 		);
 	}`,
-		score: 0.9,
+		score: 0.1,
 		component_name: 'Form',
 		upvotes: 25,
 		username: 'janedoe',
@@ -61,17 +83,21 @@ const DUMMY_SEARCH_RESULTS = [
 ];
 
 function Library() {
-	const [searchResults, setSearchResults] = useState(['a', 'b', 'c']);
+	const { prompt, setPrompt } = useStateContext();
+	const [searchResults, setSearchResults] = useState([]);
+	const [allComponents, setAllComponents] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 	const searchComponentLibrary = async (prompt) => {
+		console.log('prompt: ', prompt);
 		try {
 			setLoading(true);
 			const result = await axios.post(`${SERVER_URL}/search`, {
 				prompt,
 				top_k: 3,
 			});
+			console.log('result.data.matches: ', result.data.matches);
 			setSearchResults(result.data.matches);
 			// setSearchResults(DUMMY_SEARCH_RESULTS);
 			setLoading(false);
@@ -89,9 +115,22 @@ function Library() {
 			return { ...acc, [key]: [...curGroup, obj] };
 		}, {});
 	}
-	const groupedComponents = groupBy(DUMMY_SEARCH_RESULTS, 'category');
+
+	const groupedComponents = groupBy(!!searchResults.length ? searchResults : allComponents, 'category');
 	const categories = Object.entries(groupedComponents);
-	console.log('categories: ', categories);
+
+	const getAllComponents = async () => {
+		try {
+			const results = await axios.get(`${SERVER_URL}/library`);
+			setAllComponents(results);
+		} catch (error) {
+			console.log('error getting all components from library: ', error);
+		}
+	};
+
+	useEffect(() => {
+		if (!prompt) getAllComponents();
+	});
 
 	return (
 		<div className="w-full">
@@ -110,10 +149,14 @@ function Library() {
 										<h1>#{category}</h1>
 									</div>
 
-									<div>
-										{components.map((data, index) => {
-											return <CardComponent key={index} data={data} />;
-										})}
+									<div className="max-w-3xl gap-10 grid grid-cols-3 sm:grid-cols-2 ">
+										{components.length ? (
+											components.map((data, index) => {
+												return <CardComponent key={index} data={data} />;
+											})
+										) : (
+											<h1>No components found - generate one</h1>
+										)}
 									</div>
 								</div>
 							);
