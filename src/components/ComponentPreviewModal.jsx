@@ -22,9 +22,6 @@ function ComponentPreviewModal({ code, isModalActive, setIsModalActive }) {
 								</svg>
 								<span className="sr-only">Close modal</span>
 							</button>
-							<div className="bg-red-500 h-96 justify-center flex">
-								<CodePreview generatedCode={code} />
-							</div>
 						</div>
 					</div>
 				</div>

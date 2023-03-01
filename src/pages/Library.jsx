@@ -151,7 +151,7 @@ function Library() {
 										<h1>#{category}</h1>
 									</div>
 
-									<div className="max-w-3xl gap-10 grid grid-cols-3 sm:grid-cols-2 ">
+									<div className="max-w-3xl bg-green-300 flex items-center gap-10">
 										{components.length ? (
 											components.map((data, index) => {
 												return <CardComponent key={index} data={data} />;

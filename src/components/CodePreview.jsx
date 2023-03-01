@@ -3,7 +3,7 @@ import { LiveProvider, LiveError, LivePreview, LiveEditor } from 'react-live';
 const CodePreview = ({ generatedCode }) => {
 	console.log('generatedCode: ', generatedCode);
 	return (
-		<div className="flex justify-center items-center bg-orange-100">
+		<div className="h-full w-full flex justify-center items-center ">
 			<LiveProvider code={generatedCode}>
 				<LiveError />
 				<LivePreview />

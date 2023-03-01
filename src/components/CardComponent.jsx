@@ -4,7 +4,7 @@ import axios from 'axios';
 import ComponentPreviewModal from './ComponentPreviewModal';
 
 function CardComponent({ data }) {
-	const [isModalActive, setIsModalActive] = useState(false);
+	const [isPreviewActive, setIsPreviewActive] = useState(false);
 	const { prompt, component, score, name, upvotes, username, category } = data;
 	const similarityScore = Math.round(score * 100);
 
@@ -19,11 +19,13 @@ function CardComponent({ data }) {
 		}
 	};
 
-	const handleMouseEnter = () => {
-		setIsModalActive(true);
+	const handleMouseEnter = (e) => {
+		console.log('e: ', e.target);
+		// e.target.stopImmediatePropagation();
+		setIsPreviewActive(true);
 	};
-	const handleMouseExit = () => {
-		setIsModalActive(false);
+	const handleMouseLeave = () => {
+		setIsPreviewActive(false);
 	};
 
 	const progressBarColor = (score) => {
@@ -49,8 +51,17 @@ function CardComponent({ data }) {
 	}, [liked]);
 
 	return (
-		<div className="w-80  border border-black rounded-lg shadow">
-			<div className="p-5 pb-2 flex flex-col items-center">
+		<div
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
+			className="w-80 border border-black rounded-lg shadow h-fit bg-red-200"
+		>
+			{isPreviewActive && (
+				<div className="py-4 justify-center flex">
+					<CodePreview generatedCode={component} />
+				</div>
+			)}
+			<div className="p-5 pb-2 flex flex-col flex-wrap items-center	">
 				<h1 className="mb-2 text-xl font-bold text-gray-900">{name}</h1>
 
 				<p className="mb-5 text-lg  text-center font-normal text-black">"{prompt}"</p>
@@ -83,8 +94,6 @@ function CardComponent({ data }) {
 					<div className="text-black">{username || 'anon'}</div>
 				</div>
 			</div>
-
-			<ComponentPreviewModal code={component} isModalActive={isModalActive} setIsModalActive={setIsModalActive} />
 		</div>
 	);
 }
