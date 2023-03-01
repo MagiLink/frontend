@@ -28,7 +28,7 @@ function SearchBar({ handleSearch }) {
 				>
 					<svg
 						aria-hidden="true"
-						class="w-5 h-5 text-black dark:text-gray-800"
+						className="w-5 h-5 text-black dark:text-gray-800"
 						fill="none"
 						stroke="currentColor"
 						viewBox="0 0 24 24"

@@ -6,6 +6,7 @@ import Button from './Button';
 
 const FormModal = () => {
 	const { isFormModalActive, setIsFormModalActive, code, prompt } = useStateContext();
+	console.log('prompt form modal: ', prompt);
 	const [componentName, setComponentName] = useState('');
 	const [componentCategory, setComponentCategory] = useState('');
 

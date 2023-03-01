@@ -3,9 +3,7 @@ import { createContext, useContext, useState } from 'react';
 const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
-	const [prompt, setPrompt] = useState(
-		'Create a react component called SendButton that has a button with onclick functionality'
-	);
+	const [prompt, setPrompt] = useState();
 	const [code, setCode] = useState(``);
 	const [currentLink, setCurrentLink] = useState('generate');
 	const [isFormModalActive, setIsFormModalActive] = useState(false);

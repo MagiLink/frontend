@@ -5,9 +5,9 @@ import ComponentPreviewModal from './ComponentPreviewModal';
 
 function CardComponent({ data }) {
 	const [isModalActive, setIsModalActive] = useState(false);
-	const { prompt, component, score, component_name, upvotes, username, category } = data;
+	const { prompt, component, score, name, upvotes, username, category } = data;
 	const similarityScore = Math.round(score * 100);
-	console.log('similarityScore: ', similarityScore);
+
 	const [localUpvotes, setLocalUpvotes] = useState(upvotes);
 	const [liked, setLiked] = useState(false);
 	const handleLikePress = async () => {
@@ -51,7 +51,7 @@ function CardComponent({ data }) {
 	return (
 		<div className="w-80  border border-black rounded-lg shadow">
 			<div className="p-5 pb-2 flex flex-col items-center">
-				<h1 className="mb-2 text-xl font-bold text-gray-900">{component_name}</h1>
+				<h1 className="mb-2 text-xl font-bold text-gray-900">{name}</h1>
 
 				<p className="mb-5 text-lg  text-center font-normal text-black">"{prompt}"</p>
 

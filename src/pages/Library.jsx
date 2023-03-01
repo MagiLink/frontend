@@ -11,7 +11,7 @@ const DUMMY_SEARCH_RESULTS = [
 		return <h1>Hello, world!</h1>;
 	}`,
 		score: 0.5,
-		component_name: 'HelloWorld',
+		name: 'HelloWorld',
 		upvotes: 20,
 		username: 'janedoe',
 		category: 'text',
@@ -22,7 +22,7 @@ const DUMMY_SEARCH_RESULTS = [
 		return <h1>Hello, world!</h1>;
 	}`,
 		score: 0.83,
-		component_name: 'HelloWorld',
+		name: 'HelloWorld',
 		upvotes: 20,
 		username: 'janedoe',
 		category: 'text',
@@ -33,7 +33,7 @@ const DUMMY_SEARCH_RESULTS = [
 		return <h1>Hello, world!</h1>;
 	}`,
 		score: 0.22,
-		component_name: 'HelloWorld',
+		name: 'HelloWorld',
 		upvotes: 20,
 		username: 'janedoe',
 		category: 'text',
@@ -50,7 +50,7 @@ const DUMMY_SEARCH_RESULTS = [
 		);
 	}`,
 		score: 0.75,
-		component_name: 'List items',
+		name: 'List items',
 		upvotes: 15,
 		username: 'johndoe',
 		category: 'list',
@@ -76,7 +76,7 @@ const DUMMY_SEARCH_RESULTS = [
 		);
 	}`,
 		score: 0.1,
-		component_name: 'Form',
+		name: 'Form',
 		upvotes: 25,
 		username: 'janedoe',
 		category: 'form',
@@ -93,7 +93,7 @@ function Library() {
 	const searchComponentLibrary = async (prompt) => {
 		try {
 			setLoading(true);
-			const result = await axios.post(`${SERVER_URL}/search`, {
+			const result = await axios.post(`${SERVER_URL}/library/search`, {
 				prompt,
 				top_k: 3,
 			});
@@ -132,7 +132,7 @@ function Library() {
 	useEffect(() => {
 		// if (!prompt) getAllComponents();
 		getAllComponents();
-	}, [prompt]);
+	}, []);
 
 	return (
 		<div className="w-full">
