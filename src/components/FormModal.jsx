@@ -1,23 +1,43 @@
 import React, { useState } from 'react';
 import { componentCategories } from '../constants/categories';
 import { useStateContext } from '../context/ContextProvider';
+import Button from './Button';
 
 const FormModal = () => {
-	const { isFormModalActive, setIsFormModalActive } = useStateContext();
+	const { isFormModalActive, setIsFormModalActive, code } = useStateContext();
 	const [componentName, setComponentName] = useState('');
 	const [componentCategory, setComponentCategory] = useState('');
 
-	const handleShare = () => {};
+	const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+
+	const compObj = {
+		component_name: componentName,
+		component_category: componentCategory,
+		component: code,
+	};
+
+	console.log(compObj, '<<< compObj');
+
+	const handleShare = async () => {
+		try {
+			const result = await axios.post(
+				`${SERVER_URL}/components/library`,
+				compObj
+			);
+			console.log(result);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<div>
-			<button
+			<Button
 				className='block text-white bg-black hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center'
-				type='button'
 				onClick={() => setIsFormModalActive(true)}
 			>
 				Share your component!
-			</button>
+			</Button>
 
 			{isFormModalActive && (
 				<div className='fixed flex justify-center items-center z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full'>
@@ -35,9 +55,9 @@ const FormModal = () => {
 									xmlns='http://www.w3.org/2000/svg'
 								>
 									<path
-										fill-rule='evenodd'
+										fillRule='evenodd'
 										d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-										clip-rule='evenodd'
+										clipRule='evenodd'
 									></path>
 								</svg>
 								<span className='sr-only'>Close modal</span>
@@ -76,12 +96,12 @@ const FormModal = () => {
 										</select>
 									</div>
 
-									<button
-										type='submit'
+									<Button
 										className='w-full text-white bg-black hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center'
+										onClick={handleShare}
 									>
-										Share your component
-									</button>
+										Share
+									</Button>
 								</form>
 							</div>
 						</div>
