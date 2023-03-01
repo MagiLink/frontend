@@ -88,18 +88,21 @@ function Library() {
 	const [searchResults, setSearchResults] = useState([]);
 	const [allComponents, setAllComponents] = useState([]);
 	const [loading, setLoading] = useState(false);
+	const [validSearch, setValidSearch] = useState(false);
+
 	const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 	const searchComponentLibrary = async (prompt) => {
+		console.log('searching component library');
 		try {
 			setLoading(true);
-			const result = await axios.post(`${SERVER_URL}/library/search`, {
-				prompt,
-				top_k: 3,
-			});
-			console.log('result.data: ', result.data);
-			setSearchResults(result.data);
-			// setSearchResults(DUMMY_SEARCH_RESULTS);
+			// const result = await axios.post(`${SERVER_URL}/library/search`, {
+			// 	prompt,
+			// 	top_k: 3,
+			// });
+			// console.log('result.data: ', result.data);
+			// setSearchResults(result.data);
+			setSearchResults(DUMMY_SEARCH_RESULTS);
 			setLoading(false);
 		} catch (error) {
 			setLoading(false);
@@ -116,13 +119,14 @@ function Library() {
 		}, {});
 	}
 
-	const groupedComponents = groupBy(!!searchResults.length ? searchResults : allComponents, 'category');
+	const componentsToRender = validSearch ? searchResults : allComponents;
+
+	const groupedComponents = groupBy(componentsToRender, 'category');
 	const categories = Object.entries(groupedComponents);
 
 	const getAllComponents = async () => {
 		try {
 			const results = await axios.get(`${SERVER_URL}/library`);
-			console.log('get all results: ', results);
 			setAllComponents(results.data);
 		} catch (error) {
 			console.log('error getting all components from library: ', error);
@@ -130,13 +134,13 @@ function Library() {
 	};
 
 	useEffect(() => {
-		// if (!prompt) getAllComponents();
 		getAllComponents();
+		// getAllComponents();
 	}, []);
 
 	return (
 		<div className="w-full">
-			<SearchBar handleSearch={searchComponentLibrary} />
+			<SearchBar handleSearch={searchComponentLibrary} setValidSearch={setValidSearch} />
 
 			<div className="flex flex-col items-center">
 				{loading ? (
@@ -151,7 +155,7 @@ function Library() {
 										<h1>#{category}</h1>
 									</div>
 
-									<div className="max-w-3xl bg-green-300 flex items-center gap-10">
+									<div className="max-w-3xl  flex items-center gap-10">
 										{components.length ? (
 											components.map((data, index) => {
 												return <CardComponent key={index} data={data} />;

@@ -20,8 +20,6 @@ function CardComponent({ data }) {
 	};
 
 	const handleMouseEnter = (e) => {
-		console.log('e: ', e.target);
-		// e.target.stopImmediatePropagation();
 		setIsPreviewActive(true);
 	};
 	const handleMouseLeave = () => {
@@ -54,10 +52,10 @@ function CardComponent({ data }) {
 		<div
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
-			className="w-80 border border-black rounded-lg shadow h-fit bg-red-200"
+			className="w-80 border border-black rounded-lg shadow h-fit "
 		>
 			{isPreviewActive && (
-				<div className="py-4 justify-center flex">
+				<div className="py-4 justify-center flex bg-gray-50 ">
 					<CodePreview generatedCode={component} />
 				</div>
 			)}
