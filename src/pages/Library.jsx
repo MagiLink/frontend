@@ -1,7 +1,7 @@
 import SearchBar from '../components/SearchBar';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import CategoryFilter from '../components/categoryFilter';
+import CategoryFilter from '../components/CategoryFilter';
 import RenderCards from '../components/RenderCards';
 import { getAllComponents, groupBy } from '../utils/api';
 
