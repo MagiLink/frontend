@@ -2,9 +2,9 @@ import { LiveProvider, LiveError, LivePreview, LiveEditor } from 'react-live';
 
 const CodePreview = ({ generatedCode }) => {
 	return (
-		<div className="h-full w-full flex justify-center items-center ">
+		<div className='h-full w-[30vw] px-10 flex justify-center items-center '>
 			<LiveProvider code={generatedCode}>
-				<LiveError />
+				{generatedCode !== '' && <LiveError />}
 				<LivePreview />
 			</LiveProvider>
 		</div>
