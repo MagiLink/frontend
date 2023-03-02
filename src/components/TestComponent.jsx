@@ -12,7 +12,9 @@ const TestComponent = ({ loading }) => {
 			{/* <h1 className="text-2xl font-semibold text-center mb-2 mt-4">{!!prompt}</h1> */}
 			<div className="grid grid-cols-2 gap-10 my-10">
 				<CodeEditor generatedCode={code} />
-				<CodePreview generatedCode={code} />
+				<div className="bg-gray-50">
+					<CodePreview generatedCode={code} />
+				</div>
 			</div>
 		</div>
 	);

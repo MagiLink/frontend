@@ -10,7 +10,7 @@ function App() {
 			className={
 				isFormModalActive
 					? 'flex w-full mx-auto flex-col items-center justify-center p-10 min-h-screen bg-black/[.25]'
-					: 'flex w-full mx-auto flex-col items-center justify-center p-10 min-h-screen'
+					: 'flex w-full mx-auto flex-col items-center justify-center p-10 min-h-screen bg-gray-50'
 			}
 		>
 			{/* <Navbar /> */}

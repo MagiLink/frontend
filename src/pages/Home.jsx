@@ -9,16 +9,10 @@ const Home = () => {
 	const { currentLink } = useStateContext();
 
 	return (
-		<main className="flex flex-1 w-full flex-col items-center justify-center px-4 mt-10 sm:mt-16">
+		<main className='flex flex-1 w-full flex-col items-center justify-center px-4 mt-10 sm:mt-16'>
 			<Header />
 			<TabBar />
-			{currentLink === 'library' ? (
-				<Library />
-			) : (
-				<div>
-					<Generate />
-				</div>
-			)}
+			{currentLink === 'library' ? <Library /> : <Generate />}
 		</main>
 	);
 };

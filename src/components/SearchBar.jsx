@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStateContext } from '../context/ContextProvider';
 
-function SearchBar({ handleSearch }) {
+function SearchBar({ handleSearch, setValidSearch }) {
 	const { prompt, setPrompt } = useStateContext();
 	const handleKeyDown = (e) => {
 		if (e.key === 'Enter') {
 			// Makes a request to the server to search the component library
-			handleSearch(prompt);
+			if (prompt.length > 0) {
+				handleSearch(prompt);
+				setValidSearch(true);
+			}
 		}
 	};
+
+	useEffect(() => {
+		if (prompt === '') setValidSearch(false);
+	}, [prompt]);
 
 	return (
 		<div className="relative z-0 w-full">
 			<div className="relative">
 				<input
-					type="search"
+					type="text"
 					id="default_standard"
 					className="block  py-2.5 px-0 pl-2 w-full text-sm text-gray-900 bg-transparent border border-black rounded-xl appearance-none focus:outline-none"
 					placeholder={''}
@@ -24,11 +31,16 @@ function SearchBar({ handleSearch }) {
 				/>
 				<button
 					className="absolute right-2.5 bottom-1.5 bg-transparent hover:bg-black/20 focus:outline-none rounded-xl px-3 py-1"
-					onClick={() => handleSearch(prompt)}
+					onClick={() => {
+						if (prompt.length > 0) {
+							handleSearch(prompt);
+							setValidSearch(true);
+						}
+					}}
 				>
 					<svg
 						aria-hidden="true"
-						class="w-5 h-5 text-black dark:text-gray-800"
+						className="w-5 h-5 text-black dark:text-gray-800"
 						fill="none"
 						stroke="currentColor"
 						viewBox="0 0 24 24"

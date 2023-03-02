@@ -7,8 +7,8 @@ import FormModal from '../components/FormModal';
 import { autoCloseTags } from '@codemirror/lang-javascript';
 
 function Generate() {
-	const [userPrompt, setUserPrompt] = useState('');
-	const { code, setCode } = useStateContext();
+	// const [userPrompt, setUserPrompt] = useState('');
+	const { code, setCode, setPrompt, prompt } = useStateContext();
 
 	const [loading, setLoading] = useState(false);
 
@@ -20,7 +20,7 @@ function Generate() {
 		setLoading(true);
 		try {
 			const result = await axios.post(`${SERVER_URL}/generate`, {
-				prompt: userPrompt,
+				prompt,
 			});
 
 			setCode(result.data.component);
@@ -33,16 +33,16 @@ function Generate() {
 	};
 
 	return (
-		<div className='flex flex-col items-center'>
-			<main className='flex flex-1 w-full flex-col items-center justify-center text-center px-4 '>
-				<div className='max-w-xl w-full'>
+		<div className="flex flex-col items-center">
+			<main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 ">
+				<div className="max-w-xl w-full">
 					<textarea
-						id='message'
-						rows='4'
-						className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-black focus:border-black'
-						onChange={(e) => setUserPrompt(e.target.value)}
+						id="message"
+						rows="4"
+						className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-black focus:border-black"
+						onChange={(e) => setPrompt(e.target.value)}
 						placeholder={placeholderText}
-						value={userPrompt}
+						value={prompt}
 					/>
 
 					<Button
