@@ -65,7 +65,7 @@ const FormModal = () => {
 										<label className="block mb-2 text-sm font-medium text-gray-900">Component Name</label>
 										<input
 											className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"
-											placeholder="Kim Jung Un's big red button"
+											placeholder="A descriptive title for your component"
 											onChange={(e) => setComponentName(e.target.value)}
 											required
 										/>
